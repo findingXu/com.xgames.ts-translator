@@ -1,0 +1,15 @@
+{
+    "name": "com.xgames.ts-translator",
+    "displayName": "XGames TsTranslator",
+    "version": "1.0.0",
+    "description": "com.xgames.ts-translator",
+    "unity": "2022.3",
+    "keywords": [
+        "Ts Translator"
+    ],
+    "author": {
+        "name": "finalXuu",
+        "email": "xzjH5263@163.com"
+    },
+    "license": "MIT"
+}
