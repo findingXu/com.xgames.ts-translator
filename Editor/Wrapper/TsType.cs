@@ -15,7 +15,7 @@ namespace XGames.TsTranslator
                 return "T";
             }
 
-            if (dotType.IsPointer || dotType.IsByRef || dotType.IsNested)
+            if (dotType.IsNested)
             {
                 return "any";
             }
@@ -36,7 +36,8 @@ namespace XGames.TsTranslator
                 return GetGenericTypeName(dotType);
             }
 
-            if (!TsTypePrinter.LuaCallCSharp.Contains(dotType))
+            dotType = dotType.IsByRef ? dotType.GetElementType() : dotType;
+            if (dotType.IsNested || !TsTypePrinter.LuaCallCSharp.Contains(dotType))
             {
                 return "any";
             }
@@ -63,7 +64,8 @@ namespace XGames.TsTranslator
             }
             else
             {
-                if (!TsTypePrinter.LuaCallCSharp.Contains(type))
+                type = type.IsByRef ? type.GetElementType() : type;
+                if (type.IsNested || !TsTypePrinter.LuaCallCSharp.Contains(type))
                 {
                     return "any";
                 }

@@ -43,7 +43,7 @@ namespace XGames.TsTranslator
         private static string[] ConvertMethods(Type dotType)
         {
             var methods = dotType.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
-            var methodExpressions = methods.Select(m =>
+            var methodExpressions = methods.Where(m => !m.IsGenericMethod).Select(m =>
             {
                 var tsMethod = TsMethod.Convert(m);
                 return tsMethod;
