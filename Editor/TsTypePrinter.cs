@@ -9,12 +9,12 @@ namespace XGames.TsTranslator
 {
     public static class TsTypePrinter
     {
-        public static Type[] LuaCallCSharp;
+        public static HashSet<Type> LuaCallCSharp;
 
         public static void GenCode(IEnumerable<Type> luaCallCSharp, string outFile)
         {
             var allTypes = new List<string>();
-            LuaCallCSharp = luaCallCSharp.ToArray();
+            LuaCallCSharp = luaCallCSharp.ToHashSet();
             foreach (var type in LuaCallCSharp)
             {
                 if (TsBuilder.TryBuild(type, out var result))
@@ -26,6 +26,7 @@ namespace XGames.TsTranslator
             var tsTypeFilePath = Path.Combine(Application.dataPath, outFile);
             using (var file = new FileStream(tsTypeFilePath, FileMode.OpenOrCreate))
             {
+                file.SetLength(0);
                 var bytes = Encoding.UTF8.GetBytes(string.Join("\n", allTypes));
                 file.Write(bytes);
             }

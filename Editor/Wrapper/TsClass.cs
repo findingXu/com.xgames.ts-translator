@@ -31,7 +31,8 @@ namespace XGames.TsTranslator
             var tsContent = properties.Concat(fields).Concat(constructs).Concat(methods);
             var classBody = TsTypePrinter.TabScope(string.Join("\n", tsContent));
 
-            var tsClass = $"class {className}{extendsExpression}{implementExpression} {{ {classBody}}}";
+            var customConstructor = $"/** @customConstructor {className} */\n";
+            var tsClass = $"{customConstructor}class {className}{extendsExpression}{implementExpression} {{ {classBody}}}";
             return tsClass;
         }
 
